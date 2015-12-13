@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, redirect
 import twilio.twiml
  
 app = Flask(__name__)
@@ -19,8 +19,7 @@ def handle_key():
     digit_pressed = request.values.get('Digits', None)
     
     resp = twilio.twiml.Response()
-    resp.say("You've pressed ")
-    
+    resp.say("You've pressed " + digit_pressed)
     return str(resp)
 
 if __name__ == "__main__":
