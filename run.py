@@ -19,13 +19,16 @@ def hello():
         'From': request.values.get('From', None),
         'To': request.values.get('To', None),
     }
+
+
     if 'X-Twilio-Signature' in request.headers:        
         twilio_signature = request.headers['X-Twilio-Signature']
-        print twilio_signature
+        print "signature", twilio_signature
     else:
         print "X-Twilio-Signature was not in the request headers"
         print request.headers
 
+    print "keys", request.headers.keys()
     resp = twilio.twiml.Response()
     resp.say("Hello!")
 
