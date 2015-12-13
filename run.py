@@ -19,7 +19,8 @@ def handle_key():
     digit_pressed = request.values.get('Digits', None)
     
     resp = twilio.twiml.Response()
-    resp.say("You've pressed " + digit_pressed)
+    resp.say("You've pressed ")
+    
     return str(resp)
 
 if __name__ == "__main__":
