@@ -16,7 +16,7 @@ def hello():
     resp = twilio.twiml.Response()
     resp.say("Hello!")
 
-     params = {
+    params = {
         'CallSid': request.values.get('CallSid', None),
         'Caller': request.values.get('Caller', None),
         'Digits': request.values.get('Digits', None),
@@ -24,7 +24,7 @@ def hello():
         'To': request.values.get('To', None),
     }
     print params
-    
+
     with resp.gather(timeout=10, finishOnKey="*", action="/handle-key", method="POST") as g:
         g.say("Please enter your number and then press star.")
 
