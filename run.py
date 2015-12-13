@@ -13,18 +13,11 @@ def hello():
     validator = RequestValidator(auth_token)
     
     if 'X-Twilio-Signature' in request.headers:        
-        twilio_signature = request.headers['X-Twilio-Signature']
         my_url = 'https://still-escarpment-3259.herokuapp.com'
-        url = request.url
         params = request.form
-        my_params = {}
-        for key, val in params.iteritems():
-            my_params[key] = val
-        
-        print validator.validate(url, params, twilio_signature)
-        print validator.validate(url, my_params, twilio_signature)
+        twilio_signature = request.headers['X-Twilio-Signature']
         print validator.validate(my_url, params, twilio_signature)
-        print validator.validate(my_url, my_params, twilio_signature)
+        
     else:
         print "X-Twilio-Signature was not in the request headers"
         
