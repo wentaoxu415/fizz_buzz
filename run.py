@@ -21,7 +21,7 @@ def handle_key():
     resp = twilio.twiml.Response()
     resp.say("You've pressed " + digits_pressed)
     
-    my_digits = (x for x in range(1, digits_pressed+1))
+    my_digits = (x for x in range(1, int(digits_pressed)+1))
     for i in my_digits:
         resp.say(i)
 
