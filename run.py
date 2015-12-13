@@ -20,16 +20,25 @@ def handle_key():
     
     resp = twilio.twiml.Response()
     resp.say("You've pressed " + digits_pressed)
-    
-    my_digits = (x for x in range(1, int(digits_pressed)+1))
-    for i in my_digits:
-        resp.say(str(i))
+    resp.say("Now, let's start our fizz buzz game!")
+    resp = get_fizz_buss(resp, digits_pressed)
 
     return str(resp)
 
-# def get_fizz_buss(digits):
-#     for i in xrange(1, digits+1):
-
+def get_fizz_buss(resp, digits):
+    
+    my_digits = (x for x in range(1, int(digits)+1))
+    for i in my_digits:
+        if i % 3 == 0:
+            if i % 5 == 0:
+                resp.say("Fizz Buzz")
+            else:
+                resp.say("Fizz")
+        elif i % 5 == 0:
+            resp.say("Buzz")
+        else:
+            resp.say(str(i))
+    return resp
 
 if __name__ == "__main__":
     app.run(debug=True)
