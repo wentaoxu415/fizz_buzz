@@ -27,9 +27,10 @@ def hello():
         print twilio_signature
         print "request", request
         print "values", request.values
+        print "params", request.form
         print "my_url", url
         print "url", request.url
-        print "args", request.args.get('param')
+        
         print validator.validate(url, params, twilio_signature)
     
     else:
