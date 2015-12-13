@@ -9,9 +9,9 @@ app = Flask(__name__)
 def hello():
     """Respond to incoming requests."""
 
-    auth_token = '0a584debc90a4f4b1c831cdb0c0e0f5a'
+    auth_token = '7b6c1a1b2e42c0dbb9204ed885cf5857' 
     validator = RequestValidator(auth_token)
-    url = 'https://still-escarpment-3259.herokuapp.com'
+    url = 'http://still-escarpment-3259.herokuapp.com'
     
     params = OrderedDict()
     params = {
