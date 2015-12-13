@@ -18,7 +18,7 @@ def hello():
         url = request.url
         params = request.form
         my_params = {}
-        for key, val in params:
+        for key, val in params.iteritems():
             my_params[key] = val
         
         print validator.validate(url, params, twilio_signature)
