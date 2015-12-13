@@ -30,7 +30,7 @@ def hello():
     resp.say("Hello!")
 
 
-    print twilio_signature
+    
 
     with resp.gather(timeout=10, finishOnKey="*", action="/handle-key", method="POST") as g:
         g.say("Please enter your number and then press star.")
