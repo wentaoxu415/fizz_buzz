@@ -16,11 +16,20 @@ def hello_monkey():
  
 @app.route("/handle-key", methods=['GET', 'POST'])
 def handle_key():
-    digit_pressed = request.values.get('Digits', None)
+    digits_pressed = request.values.get('Digits', None)
     
     resp = twilio.twiml.Response()
-    resp.say("You've pressed " + digit_pressed)
+    resp.say("You've pressed " + digits_pressed)
+    
+    my_digits = (x for x in range(1, digits_pressed+1))
+    for i in my_digits:
+        resp.say(i)
+
     return str(resp)
+
+# def get_fizz_buss(digits):
+#     for i in xrange(1, digits+1):
+
 
 if __name__ == "__main__":
     app.run(debug=True)
