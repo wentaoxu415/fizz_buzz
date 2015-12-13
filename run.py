@@ -1,11 +1,28 @@
 from flask import Flask, request, redirect
 import twilio.twiml
- 
+from twilio.util import RequestValidator
+
+
 app = Flask(__name__)
- 
+
 @app.route("/", methods=['GET', 'POST'])
 def hello_monkey():
     """Respond to incoming requests."""
+
+    auth_token = '7b6c1a1b2e42c0dbb9204ed885cf5857' 
+    validator = RequestValidator(auth_token)
+    url = 'https://still-escarpment-3259.herokuapp.com'
+    params = {
+        'CallSid': request.values.get('CallSid', None),
+        'Caller': request.values.get('Caller', None),
+        'Digits': request.values.get('Digits', None),
+        'From': request.values.get('From', None),
+        'To': request.values.get('To', None)
+    }
+    print request.headers
+    twilio_signature = request.headers['X-Twilio-Signature']
+    print validator.validate(url, params, twilio_signature)
+
     resp = twilio.twiml.Response()
     resp.say("Hello Monkey")
  
@@ -26,7 +43,6 @@ def handle_key():
     return str(resp)
 
 def get_fizz_buss(resp, digits):
-    
     my_digits = (x for x in range(1, int(digits)+1))
     for i in my_digits:
         if i % 3 == 0:
