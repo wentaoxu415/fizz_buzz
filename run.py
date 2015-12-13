@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect
 import twilio.twiml
 from twilio.util import RequestValidator
-from collection
+
 
 app = Flask(__name__)
 
