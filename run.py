@@ -9,7 +9,7 @@ app = Flask(__name__)
 def hello():
     """Respond to incoming requests."""
 
-    auth_token = '7b6c1a1b2e42c0dbb9204ed885cf5857' 
+    auth_token = '0a584debc90a4f4b1c831cdb0c0e0f5a'
     validator = RequestValidator(auth_token)
     url = 'https://still-escarpment-3259.herokuapp.com'
     
@@ -18,7 +18,7 @@ def hello():
         'CallSid': request.values.get('CallSid', None),
         'Caller': request.values.get('Caller', None),
         'From': request.values.get('From', None),
-        'To': request.values.get('To', None),
+        'To': request.values.get('To', None)
     }
 
     if 'X-Twilio-Signature' in request.headers:        
@@ -47,7 +47,7 @@ def hello():
 @app.route("/handle-key", methods=['GET', 'POST'])
 def handle_key():
 
-    
+
     digits_pressed = request.values.get('Digits', None)
     
     resp = twilio.twiml.Response()
