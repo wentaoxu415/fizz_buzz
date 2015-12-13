@@ -23,9 +23,9 @@ def hello():
         twilio_signature = request.headers['X-Twilio-Signature']
         print twilio_signature
     else:
-        logging.error("X-Twilio-Signature was not in the request headers")
+        print "X-Twilio-Signature was not in the request headers"
         print request.headers
-        
+
     resp = twilio.twiml.Response()
     resp.say("Hello!")
 
