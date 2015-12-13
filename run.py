@@ -23,7 +23,7 @@ def handle_key():
     
     my_digits = (x for x in range(1, int(digits_pressed)+1))
     for i in my_digits:
-        resp.say(i)
+        resp.say(str(i))
 
     return str(resp)
 
