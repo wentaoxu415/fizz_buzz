@@ -11,9 +11,8 @@ def hello():
 
     auth_token = '7b6c1a1b2e42c0dbb9204ed885cf5857' 
     validator = RequestValidator(auth_token)
-    url = 'http://still-escarpment-3259.herokuapp.com'
+    url = 'https://still-escarpment-3259.herokuapp.com'
     
-    params = OrderedDict()
     params = {
         'CallSid': request.values.get('CallSid', None),
         'Caller': request.values.get('Caller', None),
@@ -23,9 +22,14 @@ def hello():
 
     if 'X-Twilio-Signature' in request.headers:        
         twilio_signature = request.headers['X-Twilio-Signature']
-        print url
-        print params
+        
+        #print params
         print twilio_signature
+        print "request", request
+        print "values", request.values
+        print "my_url", url
+        print "url", request.url
+        print "args", request.args.get('param')
         print validator.validate(url, params, twilio_signature)
     
     else:
