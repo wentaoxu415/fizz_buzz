@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect
 import twilio.twiml
 from twilio.util import RequestValidator
-
+from collection
 
 app = Flask(__name__)
 
@@ -12,6 +12,7 @@ def hello():
     auth_token = '7b6c1a1b2e42c0dbb9204ed885cf5857' 
     validator = RequestValidator(auth_token)
     url = 'https://still-escarpment-3259.herokuapp.com'
+    
     params = {
         'CallSid': request.values.get('CallSid', None),
         'Caller': request.values.get('Caller', None),
@@ -21,7 +22,7 @@ def hello():
 
     if 'X-Twilio-Signature' in request.headers:        
         twilio_signature = request.headers['X-Twilio-Signature']
-        print url, params, twilio_signature
+        print twilio_signature
         print validator.validate(url, params, twilio_signature)
     
     else:
