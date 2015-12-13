@@ -12,10 +12,6 @@ def hello():
     auth_token = '7b6c1a1b2e42c0dbb9204ed885cf5857' 
     validator = RequestValidator(auth_token)
     url = 'https://still-escarpment-3259.herokuapp.com'
-
-    resp = twilio.twiml.Response()
-    resp.say("Hello!")
-
     params = {
         'CallSid': request.values.get('CallSid', None),
         'Caller': request.values.get('Caller', None),
@@ -23,7 +19,18 @@ def hello():
         'From': request.values.get('From', None),
         'To': request.values.get('To', None),
     }
-    print params
+    if 'X-Twilio-Signature' in request.headers:        
+        twilio_signature = request.headers['X-Twilio-Signature']
+        print twilio_signature
+    else:
+        logging.error("X-Twilio-Signature was not in the request headers")
+        print request.headers
+        
+    resp = twilio.twiml.Response()
+    resp.say("Hello!")
+
+
+    print twilio_signature
 
     with resp.gather(timeout=10, finishOnKey="*", action="/handle-key", method="POST") as g:
         g.say("Please enter your number and then press star.")
