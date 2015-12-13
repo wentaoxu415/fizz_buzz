@@ -12,14 +12,6 @@ def hello_monkey():
     auth_token = '7b6c1a1b2e42c0dbb9204ed885cf5857' 
     validator = RequestValidator(auth_token)
     url = 'https://still-escarpment-3259.herokuapp.com'
-    params = {
-        'CallSid': request.values.get('CallSid', None),
-        'Caller': request.values.get('Caller', None),
-        'Digits': request.values.get('Digits', None),
-        'From': request.values.get('From', None),
-        'To': request.values.get('To', None),
-    }
-    print params, request.values.get('CallSid')
 
     resp = twilio.twiml.Response()
     resp.say("Hello Monkey")
@@ -31,6 +23,15 @@ def hello_monkey():
  
 @app.route("/handle-key", methods=['GET', 'POST'])
 def handle_key():
+    params = {
+        'CallSid': request.values.get('CallSid', None),
+        'Caller': request.values.get('Caller', None),
+        'Digits': request.values.get('Digits', None),
+        'From': request.values.get('From', None),
+        'To': request.values.get('To', None),
+    }
+    print params, request.values.get('CallSid')
+
     digits_pressed = request.values.get('Digits', None)
     
     resp = twilio.twiml.Response()
