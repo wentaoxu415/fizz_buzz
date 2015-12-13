@@ -34,7 +34,7 @@ def hello():
     
     else:
         print "X-Twilio-Signature was not in the request headers"
-        print request.headers
+        
 
     print "keys", request.headers.keys()
     resp = twilio.twiml.Response()
