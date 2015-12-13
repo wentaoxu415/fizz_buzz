@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect
 import twilio.twiml
 from twilio.util import RequestValidator
-from collections import OrderedDict
+
 
 app = Flask(__name__)
 
@@ -11,28 +11,20 @@ def hello():
 
     auth_token = '7b6c1a1b2e42c0dbb9204ed885cf5857' 
     validator = RequestValidator(auth_token)
-    url = 'https://still-escarpment-3259.herokuapp.com'
     
-    params = {
-        'CallSid': request.values.get('CallSid', None),
-        'Caller': request.values.get('Caller', None),
-        'From': request.values.get('From', None),
-        'To': request.values.get('To', None)
-    }
-
     if 'X-Twilio-Signature' in request.headers:        
         twilio_signature = request.headers['X-Twilio-Signature']
-        
-        #print params
-        print twilio_signature
-        print "request", request
-        print "values", request.values
-        print "params", request.form
-        print "my_url", url
-        print "url", request.url
+        my_url = 'https://still-escarpment-3259.herokuapp.com'
+        url = request.url
+        params = request.form
+        my_params = {}
+        for key, val in params:
+            my_params[key] = val
         
         print validator.validate(url, params, twilio_signature)
-    
+        print validator.validate(url, my_params, twilio_signature)
+        print validator.validate(my_url, params, twilio_signature)
+        print validator.validate(my_url, my_params, twilio_signature)
     else:
         print "X-Twilio-Signature was not in the request headers"
         
