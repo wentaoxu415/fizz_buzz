@@ -6,7 +6,7 @@ from twilio.util import RequestValidator
 app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
-def hello_monkey():
+def hello():
     """Respond to incoming requests."""
 
     auth_token = '7b6c1a1b2e42c0dbb9204ed885cf5857' 
@@ -14,8 +14,17 @@ def hello_monkey():
     url = 'https://still-escarpment-3259.herokuapp.com'
 
     resp = twilio.twiml.Response()
-    resp.say("Hello Monkey")
- 
+    resp.say("Hello!")
+
+     params = {
+        'CallSid': request.values.get('CallSid', None),
+        'Caller': request.values.get('Caller', None),
+        'Digits': request.values.get('Digits', None),
+        'From': request.values.get('From', None),
+        'To': request.values.get('To', None),
+    }
+    print params
+    
     with resp.gather(timeout=10, finishOnKey="*", action="/handle-key", method="POST") as g:
         g.say("Please enter your number and then press star.")
 
@@ -23,14 +32,7 @@ def hello_monkey():
  
 @app.route("/handle-key", methods=['GET', 'POST'])
 def handle_key():
-    params = {
-        'CallSid': request.values.get('CallSid', None),
-        'Caller': request.values.get('Caller', None),
-        'Digits': request.values.get('Digits', None),
-        'From': request.values.get('From', None),
-        'To': request.values.get('To', None),
-    }
-    print params, request.values.get('CallSid')
+
 
     digits_pressed = request.values.get('Digits', None)
     
