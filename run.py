@@ -22,7 +22,8 @@ def hello():
 
     if 'X-Twilio-Signature' in request.headers:        
         twilio_signature = request.headers['X-Twilio-Signature']
-        print validator.validate(url, params, twilio_signature)
+        print url, params, twilio_signature
+        # print validator.validate(url, params, twilio_signature)
     else:
         print "X-Twilio-Signature was not in the request headers"
         print request.headers
