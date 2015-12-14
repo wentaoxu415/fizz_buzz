@@ -22,7 +22,7 @@ def hello():
             resp.say("Hello!")
         
             with resp.gather(timeout=10, finishOnKey="*", action="/handle-key", method="POST") as g:
-            g.say("Please enter your number and then press star.")
+                g.say("Please enter your number and then press star.")
 
             return str(resp)
         
