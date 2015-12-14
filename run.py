@@ -24,8 +24,8 @@ def hello():
             with resp.gather(timeout=10, finishOnKey="*", action="/handle-key", method="POST") as g:
                 g.say("Please enter your number and then press star.")
         else: 
-            #raise AuthenticationFailed("Authentication Failed")
-            pass
+            abort(401)
+            
     return str(resp)
         
 
