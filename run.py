@@ -67,14 +67,7 @@ def outbound():
     resp.say("Hello! Welcome to the telephone fizz buzz game!")
     with resp.gather(timeout=10, finishOnKey="*", action="/handle-key", method="POST") as g:
         g.say("Please enter your number and then press star.")
-    
-    '''
-    # Uncomment this code and replace the number with the number you want 
-    # your customers to call.
-    '''
-    # with response.dial() as dial:
-    #     dial.number("+12815423439")
-    
+        
     return str(resp)
 
 @app.route("/handle-key", methods=['GET', 'POST'])
@@ -82,7 +75,7 @@ def handle_key():
     # Get digits pressed by the caller
     digits_pressed = request.values.get('Digits', None)
     
-    resp = twilio.twiml.Response()
+    resp = twiml.Response()
     resp.say("You've pressed " + digits_pressed)
     resp.say("Now, let's start our fizz buzz game!")
     resp = get_fizz_buss(resp, digits_pressed)
