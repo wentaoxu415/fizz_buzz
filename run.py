@@ -65,9 +65,11 @@ def call():
 def outbound():
     resp = twiml.Response()
     resp.say("Hello! Welcome to the telephone fizz buzz game!")
+    
     with resp.gather(timeout=10, finishOnKey="*", action="/handle-key", method="POST") as g:
         g.say("Please enter your number and then press star.")
-        
+    
+ 
     return str(resp)
 
 @app.route("/handle-key", methods=['GET', 'POST'])
