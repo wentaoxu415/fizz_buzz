@@ -10,13 +10,16 @@ def hello():
     """Respond to incoming requests."""
 
     resp = twilio.twiml.Response()
-    
+    first_request = True
     # Replace with your own authorization token
     auth_token = '7b6c1a1b2e42c0dbb9204ed885cf5857' 
     validator = RequestValidator(auth_token)
     
     if 'X-Twilio-Signature' not in request.headers:        
-        pass
+        if first_request:
+            first_request = False
+        else:
+            abort(401)
     else:         
         my_url = 'https://still-escarpment-3259.herokuapp.com'
         params = request.form
