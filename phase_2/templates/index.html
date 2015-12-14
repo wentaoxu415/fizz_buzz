@@ -8,28 +8,33 @@
       <link rel="stylesheet" 
           href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">   
       <link rel="stylesheet" href="/static/styles/intlTelInput.css">
+
+      <!-- Personal Stylesheet-->
+      <link rel="stylesheet" href="/static/styles/customStyles.css">
+
   </head>
   <body>
     <div class="container">
-        <div class="row col-md-8 col-md-offset-2 text-center"><h1>Fizz Buzz</h1></div>
-        <p>
-            Enter your number to get a call and play Fizz Buzz! 
-        </p>
-        <hr>
-
+        <div class="row col-md-12 text-center brand">Fizz Buzz</div>
+        <div class="row col-md-12 text-center">         
+          Enter your number to get a call and play Fizz Buzz!  
+        </div>
+        
         <!-- C2C contact form-->
-        <div class="row">
-            <div class="col-md-12">
-                <form id="contactForm" role="form">
-                    <div class="form-group">
-                        <input type="text" id="phoneNumber" 
-                            placeholder="(651) 555-7889" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-default">
-                        Start
-                    </button>
-                </form>
+        <div class="row col-md-12 form-wrapper">
+          <form id="contactForm" role="form">
+            <div class="row">
+              <div class="form-group">
+                <input type="text" id="phoneNumber" 
+                    placeholder="(651) 555-7889" class="form-control">
+              </div>
             </div>
+            <div class="row">
+              <button type="submit" class="btn btn-primary">
+                Start
+              </button>
+            </div>
+          </form>
         </div>
     </div>
     <!-- Include page dependencies -->
