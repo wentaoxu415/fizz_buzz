@@ -20,6 +20,7 @@ def index():
     validator = RequestValidator(app.config['TWILIO_AUTH_TOKEN'])
 
     if 'X-Twilio-Signature' not in request.headers:      
+        print "not in header"
         if first_request:
             first_request = False
         else:
