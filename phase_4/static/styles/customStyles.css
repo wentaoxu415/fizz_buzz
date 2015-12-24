@@ -1,0 +1,20 @@
+.brand{
+	margin-top: 20%;
+	font-size: 7em;
+}
+
+.form-wrapper{
+	text-align: center;
+	margin-top: 20px;
+}
+
+#delay{
+	position: relative;
+	display: inline-block;
+	width: 204px;
+}
+
+#delay-span{
+	margin-left: -100px;
+	margin-right: 20px;
+}

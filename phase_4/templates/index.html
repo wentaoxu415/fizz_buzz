@@ -25,17 +25,47 @@
           <form id="contactForm" role="form">
             <div class="row">
               <div class="form-group">
+                <span class="delay-span">Phone Number</span>
                 <input type="text" id="phoneNumber" 
                     placeholder="(651) 555-7889" class="form-control">
               </div>
             </div>
             <div class="row">
+              <div class="form-group">
+                <span class="delay-span">Delay (Minutes)</span>
+                <input type="number" id="delay" 
+                    placeholder="0" value="0" class="form-control">  
+              </div>
+            </div>
+            <div class="row submit-button">
               <button type="submit" class="btn btn-primary">
                 Start
               </button>
             </div>
           </form>
         </div>
+        {% if records %}
+        <table class="table">
+          <thead>
+            <th>Phone Number</th>
+            <th>Date (UTC)</th>
+            <th>Delay</th>
+            <th>Fizz Buzz</th>
+            <th>Recording</th>
+          </thead>
+          <tbody>
+            {% for record in records %}
+            <tr>
+              <td>{{ record.phone_number }}</td>
+              <td>{{ record.time }}</td>
+              <td>{{ record.delay }}</td>
+              <td>{{ record.fizz_buzz }}</td>
+              <td><a href="{{ record.record_link }}" class="btn-link">Listen</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% endif %}
     </div>
     <!-- Include page dependencies -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

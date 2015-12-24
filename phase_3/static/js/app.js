@@ -20,7 +20,8 @@ $(function() {
             method: 'POST',
             dataType: 'json',
             data: {
-                phoneNumber: $('#phoneNumber').val()
+                phoneNumber: $('#phoneNumber').val(),
+                delay: $('#delay').val()
             }
         }).done(function(data) {
             // The JSON sent back from the server will contain 

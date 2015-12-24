@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Fizz Buzz Game</title>
+      <!-- Third Party Stylesheets-->
+      <link rel="stylesheet" 
+          href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+      <link rel="stylesheet" 
+          href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">   
+      <link rel="stylesheet" href="/static/styles/intlTelInput.css">
+
+      <!-- Personal Stylesheet-->
+      <link rel="stylesheet" href="/static/styles/customStyles.css">
+
+  </head>
+  <body>
+    <div class="container">
+        <div class="row col-md-12 text-center brand">Fizz Buzz</div>
+        <div class="row col-md-12 text-center">         
+          Enter your number to get a call and play Fizz Buzz!  
+        </div>
+        
+        <!-- C2C contact form-->
+        <div class="row col-md-12 form-wrapper">
+          <form id="contactForm" role="form">
+            <div class="row">
+              <div class="form-group">
+                <span class="delay-span">Phone Number</span>
+                <input type="text" id="phoneNumber" 
+                    placeholder="(651) 555-7889" class="form-control">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <span class="delay-span">Delay (Minutes)</span>
+                <input type="number" id="delay" 
+                    placeholder="0" value="0" class="form-control">  
+              </div>
+            </div>
+            <div class="row submit-button">
+              <button type="submit" class="btn btn-primary">
+                Start
+              </button>
+            </div>
+          </form>
+        </div>
+    </div>
+    <!-- Include page dependencies -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/static/js/intlTelInput.min.js"></script>
+    <script src="/static/js/app.js"></script>
+  </body>
+</html>

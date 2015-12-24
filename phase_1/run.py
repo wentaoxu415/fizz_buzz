@@ -1,7 +1,9 @@
 from flask import Flask, request, redirect
-import twilio.twiml
+
+from twilio import twiml
 from twilio.util import RequestValidator
 
+import os
 
 app = Flask(__name__)
 
@@ -9,11 +11,13 @@ app = Flask(__name__)
 def hello():
     """Respond to incoming requests."""
 
-    resp = twilio.twiml.Response()
+    resp = twiml.Response()
     first_request = True
-    # Replace with your own authorization token
-    auth_token = '7b6c1a1b2e42c0dbb9204ed885cf5857' 
-    validator = RequestValidator(auth_token)
+    twilio_account_sid = os.environ.get("TWILIO_ACCOUNT_SID")
+    twilio_auth_token = os.environ.get("TWILIO_AUTH_TOKEN")
+    twilio_number = os.environ.get("TWILIO_NUMBER")
+
+    validator = RequestValidator(twilio_auth_token)
     
     if 'X-Twilio-Signature' not in request.headers:        
         if first_request:
@@ -21,9 +25,14 @@ def hello():
         else:
             abort(401)
     else:         
-        my_url = 'https://still-escarpment-3259.herokuapp.com'
+        my_url = request.url
+        if my_url.startswith('http://'):
+            my_url = my_url.replace("http", "https")
+        
         params = request.form
+        
         twilio_signature = request.headers['X-Twilio-Signature']
+        
         if validator.validate(my_url, params, twilio_signature):
             resp.say("Hello! Welcome to the telephone fizz buzz game!")
             with resp.gather(timeout=10, finishOnKey="*", action="/handle-key", method="POST") as g:
@@ -39,7 +48,7 @@ def handle_key():
     # Get digits pressed by the caller
     digits_pressed = request.values.get('Digits', None)
     
-    resp = twilio.twiml.Response()
+    resp = twiml.Response()
     resp.say("You've pressed " + digits_pressed)
     resp.say("Now, let's start our fizz buzz game!")
     resp = get_fizz_buss(resp, digits_pressed)
@@ -64,4 +73,4 @@ def get_fizz_buss(resp, digits):
     return resp
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

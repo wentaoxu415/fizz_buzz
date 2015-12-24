@@ -1,0 +1,2 @@
+web: gunicorn schedules:app.flask_app --log-file -
+worker: celery -A schedules.celery worker -l info

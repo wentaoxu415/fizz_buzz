@@ -7,32 +7,14 @@ from flask import url_for
 from twilio import twiml
 from twilio.util import RequestValidator
 from twilio.rest import TwilioRestClient
+import os
 
 # Declare and configure application
 app = Flask(__name__, static_url_path='/static')
-app.config.from_pyfile('local_settings.py')
-
 
 # Route for Click to Call demo page.
 @app.route('/')
 def index():
-    first_request = True
-    validator = RequestValidator(app.config['TWILIO_AUTH_TOKEN'])
-
-    if 'X-Twilio-Signature' not in request.headers:      
-        print "not in header"
-        if first_request:
-            first_request = False
-        else:
-            abort(401)
-    else:
-        my_url = 'https://still-escarpment-3259.herokuapp.com'
-        params = request.form
-        twilio_signature = request.headers['X-Twilio-Signature']
-        if not validator.validate(my_url, params, twilio_signature):
-            abort(401)
-
-
     return render_template('index.html',
                            configuration_error=None)
 
@@ -40,18 +22,44 @@ def index():
 # Voice Request URL
 @app.route('/call', methods=['POST'])
 def call():
+    
+    # Credentials
+    twilio_account_sid = os.environ.get("TWILIO_ACCOUNT_SID")
+    twilio_auth_token = os.environ.get("TWILIO_AUTH_TOKEN")
+    twilio_number = os.environ.get("TWILIO_NUMBER")
+    print twilio_account_sid, twilio_auth_token, twilio_number
+    validator = RequestValidator(twilio_auth_token)
+
+    first_request = True
+    
     # Get phone number we need to call
     phone_number = request.form.get('phoneNumber', None)
+    
 
+    if 'X-Twilio-Signature' not in request.headers:      
+        if first_request:
+            first_request = False
+        else:
+            abort(401)
+    else:
+        my_url = request.url
+        if my_url.startswith('http://'):
+            my_url = my_url.replace("http", "https")
+        params = request.form
+        twilio_signature = request.headers['X-Twilio-Signature']
+        if not validator.validate(my_url, params, twilio_signature):
+            abort(401)
+    
+    
+    
     try:
-        twilio_client = TwilioRestClient(app.config['TWILIO_ACCOUNT_SID'],
-                                         app.config['TWILIO_AUTH_TOKEN'])
+        twilio_client = TwilioRestClient(twilio_account_sid, twilio_auth_token)
     except Exception as e:
         msg = 'Missing configuration variable: {0}'.format(e)
         return jsonify({'error': msg})
 
     try:
-        twilio_client.calls.create(from_=app.config['TWILIO_CALLER_ID'],
+        twilio_client.calls.create(from_=twilio_number,
                                    to=phone_number,
                                    url=url_for('.outbound',
                                                _external=True))
