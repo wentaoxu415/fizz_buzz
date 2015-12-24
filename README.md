@@ -10,10 +10,10 @@ To use the website in phase 4, visit https://schedule-fizzbuzz.herokuapp.com/
 4. Start a dyno and run the application. 
 
 ##Phase 1
-    Created using Flask framework. Call the Twilio Number to play fizz buzz on your phone. 
+Created using Flask framework. Call the Twilio Number to play fizz buzz on your phone. 
 ##Phase 2
-    Created using Flask framework with a web interface. Visit the website and enter your number to play fizz buzz on your phone. 
+Created using Flask framework with a web interface. Visit the website and enter your number to play fizz buzz on your phone. 
 ##Phase 3
-    Created using Flask framework and Celery to support delay call. Visit the website and enter your number and delay minutes to play fizz buzz on your phone. 
+Created using Flask framework and Celery to support delay call. Visit the website and enter your number and delay minutes to play fizz buzz on your phone. 
 ##Phase 4
-    Created using Flask framework, Celery, and Postgres to store and display the past call. Visit the website and enter your number and delay minutes to play fizz buzz on your phone. Click on "Listen" to hear the recording of fizz buzz from the past phone calls. 
+Created using Flask framework, Celery, and Postgres to store and display the past call. Visit the website and enter your number and delay minutes to play fizz buzz on your phone. Click on "Listen" to hear the recording of fizz buzz from the past phone calls. 
